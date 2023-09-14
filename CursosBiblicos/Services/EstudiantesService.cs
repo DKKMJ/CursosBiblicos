@@ -9,7 +9,7 @@ namespace CursosBiblicos.Services
         public async Task<EstudianteResponse> CrearEstudiante(EstudiantesDTO data)
         {
             EstudianteResponse response = new();
-            using (var context = new cursosbiblicosContext())
+            using (var context = new grupoint_cursosbiblicosContext())
             {
                 try
                 {
