@@ -56,7 +56,7 @@ namespace CursosBiblicos.Services
         public async Task<EstudiantesResponse> ListaEstudiante()
         {
             EstudiantesResponse response = new();
-            using (var context = new cursosbiblicosContext())
+            using (var context = new grupoint_cursosbiblicosContext())
             {
                 try
                 {

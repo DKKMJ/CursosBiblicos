@@ -13,5 +13,10 @@ namespace CursosBiblicos.Models
 
         public virtual ControladorCurso? CursoNavigation { get; set; }
         public virtual ControladorEstudiante? EstudianteNavigation { get; set; }
+
+        public static implicit operator List<object>(ControladorCalificacione v)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

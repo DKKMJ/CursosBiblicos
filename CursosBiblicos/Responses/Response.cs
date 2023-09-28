@@ -19,4 +19,14 @@ namespace CursosBiblicos.Responses
     {
         public ControladorEstudiante Data { get; set; }
     }
+
+    public class CalificacionResponse : Response
+    {
+        public ControladorCalificacione Data { get; set; }
+    }
+
+    public class CalificacionesResponse : Response
+    {
+        public List<ControladorCalificacione> Data { get; set; }
+    }
 }
