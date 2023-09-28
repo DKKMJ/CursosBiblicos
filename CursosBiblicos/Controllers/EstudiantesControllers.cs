@@ -33,12 +33,13 @@ namespace CursosBiblicos.Controllers
             var response = await service.EliminarEstudiante(id);// Llamar al método de servicio para eliminar un estudiante
             return new JsonResult(response) { StatusCode = response.Code };// Retornar la respuesta en formato JSON con el código de estado correspondiente
         }
-        [HttpGet("obtener-Estudiante/{id}")]
-        public async Task<IActionResult> OptenerEstudiante(int id)
+        [HttpGet("ObtenerEstudiante/{id}")]  // Cambiar "OptenerEstudiante" a "ObtenerEstudiante"
+        public async Task<IActionResult> ObtenerEstudiante(int id)
         {
-            var response = await service.OptenerEstudiante(id);// Llamar al método de servicio para eliminar un estudiante
-            return new JsonResult(response) { StatusCode = response.Code };// Retornar la respuesta en formato JSON con el código de estado correspondiente
+            var response = await service.ObtenerEstudiante(id); // Llamar al método correcto: ObtenerEstudiante
+            return new JsonResult(response) { StatusCode = response.Code };
         }
+
 
         // Endpoint para obtener la lista de estudiantes
         [HttpGet("Lista-Estudiante")]

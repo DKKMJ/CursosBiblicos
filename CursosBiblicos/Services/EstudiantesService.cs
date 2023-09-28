@@ -205,23 +205,31 @@ namespace CursosBiblicos.Services
             }
             return response;
         }
-        public async Task<EstudiantesResponse> OptenerEstudiante(int Id)
+        public async Task<EstudianteResponse> ObtenerEstudiante(int Id)
         {
-            EstudiantesResponse response = new EstudiantesResponse();
+            EstudianteResponse response = new EstudianteResponse();
             using (var context = new grupoint_cursosbiblicosContext())
             {
                 try
                 {
                     await Task.Run(() =>
                     {
-                        // Obtener la lista de estudiantes desde la base de datos
-                        var calificacion = context.ControladorEstudiantes.Find(Id);
-                        var usuarios = (from u in context.ControladorEstudiantes
-                                        select u).ToList();
-                        response.Data = usuarios;
-                        response.Status = true;
-                        response.Code = 200;
-                        response.Message = "OK";
+                        // Obtener el estudiante desde la base de datos por su ID
+                        var estudiante = context.ControladorEstudiantes.Find(Id);
+
+                        if (estudiante != null)
+                        {
+                            response.Data = estudiante ; // Colocar el estudiante en una lista
+                            response.Status = true;
+                            response.Code = 200;
+                            response.Message = "OK";
+                        }
+                        else
+                        {
+                            response.Status = false;
+                            response.Code = 404;
+                            response.Message = "Estudiante no encontrado.";
+                        }
                     });
                 }
                 catch (Exception ex)
@@ -233,5 +241,6 @@ namespace CursosBiblicos.Services
             }
             return response;
         }
+
     }
 }
