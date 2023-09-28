@@ -205,5 +205,33 @@ namespace CursosBiblicos.Services
             }
             return response;
         }
+        public async Task<EstudiantesResponse> OptenerEstudiante(int Id)
+        {
+            EstudiantesResponse response = new EstudiantesResponse();
+            using (var context = new grupoint_cursosbiblicosContext())
+            {
+                try
+                {
+                    await Task.Run(() =>
+                    {
+                        // Obtener la lista de estudiantes desde la base de datos
+                        var calificacion = context.ControladorEstudiantes.Find(Id);
+                        var usuarios = (from u in context.ControladorEstudiantes
+                                        select u).ToList();
+                        response.Data = usuarios;
+                        response.Status = true;
+                        response.Code = 200;
+                        response.Message = "OK";
+                    });
+                }
+                catch (Exception ex)
+                {
+                    response.Status = false;
+                    response.Code = 400;
+                    response.Message = "Error: " + ex.Message;
+                }
+            }
+            return response;
+        }
     }
 }

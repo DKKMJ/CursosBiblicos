@@ -19,7 +19,7 @@ namespace CursosBiblicos.Controllers
         }
 
         // Endpoint para editar un estudiante
-        [HttpPut("Editar-Estudiante")]
+        [HttpPut("Editar-Estudiante/{id}")]
         public async Task<IActionResult> EditarEstudiante([FromBody] EstudiantesDTO data, int id)
         {
             var response = await service.EditarEstudiante(data, id); // Llamar al método de servicio para editar un estudiante
@@ -27,10 +27,16 @@ namespace CursosBiblicos.Controllers
         }
 
         // Endpoint para eliminar un estudiante
-        [HttpDelete("Eliminar-Estudiante")]
+        [HttpDelete("Eliminar-Estudiante/{id}")]
         public async Task<IActionResult> EliminarEstudiante(int id)
         {
             var response = await service.EliminarEstudiante(id);// Llamar al método de servicio para eliminar un estudiante
+            return new JsonResult(response) { StatusCode = response.Code };// Retornar la respuesta en formato JSON con el código de estado correspondiente
+        }
+        [HttpGet("obtener-Estudiante/{id}")]
+        public async Task<IActionResult> OptenerEstudiante(int id)
+        {
+            var response = await service.OptenerEstudiante(id);// Llamar al método de servicio para eliminar un estudiante
             return new JsonResult(response) { StatusCode = response.Code };// Retornar la respuesta en formato JSON con el código de estado correspondiente
         }
 
