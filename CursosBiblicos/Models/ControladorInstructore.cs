@@ -18,5 +18,7 @@ namespace CursosBiblicos.Models
         public string? Telefono { get; set; }
 
         public virtual ICollection<ControladorModulosDeCurso> ControladorModulosDeCursos { get; set; }
+
+       
     }
 }

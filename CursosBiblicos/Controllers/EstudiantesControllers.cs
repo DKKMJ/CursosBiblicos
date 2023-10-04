@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace CursosBiblicos.Controllers
 {
-    public class EstudiantesControllers : ControllerBase
+    public class Estudiantes : ControllerBase
     {
         // Instancia del servicio de estudiantes
         EstudiantesService service = new EstudiantesService();

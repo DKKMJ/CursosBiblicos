@@ -59,5 +59,14 @@ namespace CursosBiblicos.Responses
     {
         public List<ControladorModulosDeCurso> Data { get; set; }
     }
+    public class InstructoresResponse : Response  //se usa para retornar en la data un objeto que contiene una lista de objetos de tipo Usuario
+    {
+        public List<ControladorInstructore> Data { get; set; }
+    }
+
+    public class InstructoreResponse : Response  //se usa para retornar en la data un objeto de tipo Usuario
+    {
+        public ControladorInstructore Data { get; set; }
+    }
 }
 
