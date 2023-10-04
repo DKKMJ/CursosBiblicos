@@ -29,6 +29,7 @@ namespace CursosBiblicos.Responses
     {
         public List<ControladorCalificacione> Data { get; set; }
     }
+
     public class InscripcionResponse : Response
     {
         public ControladorInscripcione Data { get; set; }
@@ -37,6 +38,16 @@ namespace CursosBiblicos.Responses
     public class InscripcionesResponse : Response
     {
         public List<ControladorInscripcione> Data { get; set; }
+    }
+
+    public class CursosResponse : Response  //se usa para retornar en la data un objeto que contiene una lista de objetos de tipo Curso
+    {
+        public List<ControladorCurso> Data { get; set; }
+    }
+
+    public class CursoResponse : Response  //se usa para retornar en la data un objeto de tipo curso
+    {
+        public ControladorCurso Data { get; set; }
     }
 }
 

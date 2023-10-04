@@ -1,52 +1,43 @@
 ﻿using CursosBiblicos.DTOS;
 using CursosBiblicos.Models;
 using CursosBiblicos.Responses;
+using Microsoft.EntityFrameworkCore;
 
 namespace CursosBiblicos.Services
 {
-    public class CalificacionesService
+    public class CursoService
     {
-        public async Task<Response> CrearCalificacion(CalificacionDTO data)
+        public async Task<Response> CrearCurso(CursoDTO data)
         {
-            CalificacionResponse response = new();
+            CursoResponse response = new();
             using (var context = new grupoint_cursosbiblicosContext())
             {
                 try
                 {
-                    // Verifica si el estudiante existe en la base de datos
-                    var estudianteExiste = context.ControladorEstudiantes.Any(e => e.Id == data.Estudiante);
-                    if (!estudianteExiste)
+                    // Verifica si el curso ya existe en la base de datos
+                    var cursoExiste = context.ControladorCursos.Any(e => e.NombreDelCurso == data.NombreDelCurso);
+                    if (cursoExiste)
                     {
                         response.Status = false;
                         response.Code = 400;
-                        response.Message = "Error: El estudiante no existe.";
-                        return response;
-                    }
-
-                    // Verifica si el curso existe en la base de datos
-                    var cursoExiste = context.ControladorCursos.Any(c => c.Id == data.Curso);
-                    if (!cursoExiste)
-                    {
-                        response.Status = false;
-                        response.Code = 400;
-                        response.Message = "Error: El curso no existe.";
+                        response.Message = "Error: El curso ya existe.";
                         return response;
                     }
 
                     await Task.Run(() =>
                     {
-                        ControladorCalificacione calificacion = new()
+                        ControladorCurso curso = new()
                         {
-                            Calificacion = data.Calificacion,
-                            Fecha = data.Fecha,
-                            Estudiante = data.Estudiante,
-                           // Curso = data.Curso
+                            NombreDelCurso = data.NombreDelCurso,
+                            Descripcion = data.Descripcion,
+                            FechaDeCreacion = data.FechaDeCreacion,
+                            Puntaje = data.Puntaje,
                         };
 
-                        context.ControladorCalificaciones.Add(calificacion);
+                        context.ControladorCursos.Add(curso);
                         context.SaveChanges();
 
-                        response.Data = calificacion;
+                        response.Data = curso;
                         response.Status = true;
                         response.Code = 200;
                         response.Message = "OK";
@@ -62,19 +53,19 @@ namespace CursosBiblicos.Services
             return response;
         }
 
-        public async Task<CalificacionesResponse> ListaCalificaciones()
+        public async Task<CursosResponse> ListaCursos()
         {
-            CalificacionesResponse response = new();
+            CursosResponse response = new();
             using (var context = new grupoint_cursosbiblicosContext())
             {
                 try
                 {
                     await Task.Run(() =>
                     {
-                        var calificaciones = (from u in context.ControladorCalificaciones
-                                        select u).ToList();
+                        var cursos = (from u in context.ControladorCursos
+                                              select u).ToList();
 
-                        response.Data = calificaciones;
+                        response.Data = cursos;
                         response.Status = true;
                         response.Code = 200;
                         response.Message = "OK";
@@ -90,22 +81,22 @@ namespace CursosBiblicos.Services
             return response;
         }
 
-        public async Task<Response> ObtenerCalificacion(int id)
+        public async Task<Response> ObtenerCurso(int id)
         {
-            CalificacionesResponse response = new();
+            CursoResponse response = new();
             using (var context = new grupoint_cursosbiblicosContext())
             {
                 try
                 {
                     await Task.Run(() =>
                     {
-                        var calificacion = context.ControladorCalificaciones.Find(id);
-                        if (calificacion == null)
+                        var curso = context.ControladorCursos.Find(id);
+                        if (curso == null)
                         {
-                            throw new Exception("Calificación no encontrada.");
+                            throw new Exception("Curso no encontrado.");
                         }
 
-                        response.Data = new List<ControladorCalificacione> { calificacion };
+                        response.Data = curso;
                         response.Status = true;
                         response.Code = 200;
                         response.Message = "OK";
@@ -121,29 +112,29 @@ namespace CursosBiblicos.Services
             return response;
         }
 
-        public async Task<CalificacionesResponse> ActualizarCalificacion(int id, CalificacionDTO data)
+        public async Task<CursoResponse> ActualizarCurso(int id, CursoDTO data)
         {
-            CalificacionesResponse response = new();
+            CursoResponse response = new();
             using (var context = new grupoint_cursosbiblicosContext())
             {
                 try
                 {
                     await Task.Run(() =>
                     {
-                        var calificacion = context.ControladorCalificaciones.Find(id);
-                        if (calificacion == null)
+                        var curso = context.ControladorCursos.Find(id);
+                        if (curso == null)
                         {
-                            throw new Exception("Calificación no encontrada.");
+                            throw new Exception("Curso no encontrado.");
                         }
 
-                        calificacion.Calificacion = data.Calificacion;
-                        calificacion.Fecha = data.Fecha;
-                        calificacion.Estudiante = data.Estudiante;
-                        calificacion.Curso = data.Curso;
+                        curso.NombreDelCurso = data.NombreDelCurso;
+                        curso.Descripcion = data.Descripcion;
+                        curso.FechaDeCreacion = data.FechaDeCreacion;
+                        curso.Puntaje = data.Puntaje;
+
 
                         context.SaveChanges();
-
-                        response.Data = new List<ControladorCalificacione> { calificacion };
+                        response.Data = new List<ControladorCurso> {curso};
                         response.Status = true;
                         response.Code = 200;
                         response.Message = "OK";
@@ -159,22 +150,22 @@ namespace CursosBiblicos.Services
             return response;
         }
 
-        public async Task<CalificacionesResponse> EliminarCalificacion(int id)
+        public async Task<CursoResponse> EliminarCurso(int id)
         {
-            CalificacionesResponse response = new();
+            CursoResponse response = new();
             using (var context = new grupoint_cursosbiblicosContext())
             {
                 try
                 {
                     await Task.Run(() =>
                     {
-                        var calificacion = context.ControladorCalificaciones.Find(id);
-                        if (calificacion == null)
+                        var curso = context.ControladorCursos.Find(id);
+                        if (curso == null)
                         {
-                            throw new Exception("Calificación no encontrada.");
+                            throw new Exception("Curso no encontrada.");
                         }
 
-                        context.ControladorCalificaciones.Remove(calificacion);
+                        context.ControladorCursos.Remove(curso);
                         context.SaveChanges();
 
                         response.Status = true;
@@ -194,3 +185,4 @@ namespace CursosBiblicos.Services
     }
 
 }
+

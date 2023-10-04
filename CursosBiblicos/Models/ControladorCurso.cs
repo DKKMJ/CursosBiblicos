@@ -21,5 +21,10 @@ namespace CursosBiblicos.Models
         public virtual ICollection<ControladorCalificacione> ControladorCalificaciones { get; set; }
         public virtual ICollection<ControladorInscripcione> ControladorInscripciones { get; set; }
         public virtual ICollection<ControladorModulosDeCurso> ControladorModulosDeCursos { get; set; }
+
+        public static implicit operator ControladorCurso(List<ControladorCurso> v)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

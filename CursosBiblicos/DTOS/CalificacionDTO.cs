@@ -9,6 +9,6 @@ namespace CursosBiblicos.DTOS
         public decimal? Calificacion { get; set; }
         public DateOnly? Fecha { get; set; }
         public int? Estudiante { get; set; }
-        //public int? Curso { get; set; }
+        public int? Curso { get; set; }
     }
 }
