@@ -1,6 +1,5 @@
 ﻿using CursosBiblicos.DTOS;
 using CursosBiblicos.Services;
-using Microsoft.AspNetCore.Cors.Infrastructure;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CursosBiblicos.Controllers

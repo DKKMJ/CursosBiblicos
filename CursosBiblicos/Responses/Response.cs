@@ -49,5 +49,15 @@ namespace CursosBiblicos.Responses
     {
         public ControladorCurso Data { get; set; }
     }
+
+    public class ModuloCursoResponse : Response
+    {
+        public ControladorModulosDeCurso Data { get; set; }
+    }
+
+    public class ModulosCursoResponse : Response
+    {
+        public List<ControladorModulosDeCurso> Data { get; set; }
+    }
 }
 

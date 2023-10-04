@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace CursosBiblicos.DTOS
+﻿namespace CursosBiblicos.DTOS
 {
     public class EstudiantesDTO
     {      
@@ -11,10 +9,5 @@ namespace CursosBiblicos.DTOS
         public string? Direccion { get; set; }
         public string? Mail { get; set; }
         public string? Telefono { get; set; }
-
-
-
-
     }
-    
 }

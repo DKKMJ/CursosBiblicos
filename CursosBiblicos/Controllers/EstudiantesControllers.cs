@@ -1,7 +1,6 @@
 ﻿using CursosBiblicos.DTOS;
 using CursosBiblicos.Services;
 using Microsoft.AspNetCore.Mvc;
-using System.Threading.Tasks;
 
 namespace CursosBiblicos.Controllers
 {

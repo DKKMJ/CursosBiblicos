@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace CursosBiblicos.DTOS
+﻿namespace CursosBiblicos.DTOS
 {
     public class CursoDTO
     {

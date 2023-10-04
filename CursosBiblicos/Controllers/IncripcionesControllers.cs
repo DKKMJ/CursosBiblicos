@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace CursosBiblicos.Controllers
 {
             
-        public class InscripcionesController : ControllerBase // Debes heredar de ControllerBase
+        public class InscripcionesController : ControllerBase // Debe heredar de ControllerBase
         {
         InscripcionesService service = new();
 
