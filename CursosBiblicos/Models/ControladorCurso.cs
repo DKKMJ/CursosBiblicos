@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace CursosBiblicos.Models
+﻿namespace CursosBiblicos.Models
 {
     public partial class ControladorCurso
     {
