@@ -1,4 +1,5 @@
-﻿using CursosBiblicos.Models;
+﻿using CursosBiblicos.Controllers;
+using CursosBiblicos.Models;
 
 namespace CursosBiblicos.Responses
 {
@@ -77,6 +78,14 @@ namespace CursosBiblicos.Responses
     {
         public ControladorRecurso Data { get; set; }
     }
+    public class AutenticacionesResponse : Response  //se usa para retornar en la data un objeto que contiene una lista de objetos de tipo Usuario
+    {
+        public List<ControladorAutenticacion> Data { get; set; }
+    }
 
+    public class AutenticacionResponse : Response  //se usa para retornar en la data un objeto de tipo Usuario
+    {
+        public ControladorAutenticacion Data { get; set; }
+    }
 }
 

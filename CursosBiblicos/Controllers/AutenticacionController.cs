@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using CursosBiblicos.DTOS;
+using CursosBiblicos.Services;
 
 namespace CursosBiblicos.Controllers
 {
@@ -8,19 +9,20 @@ namespace CursosBiblicos.Controllers
     public class AutenticacionController : ControllerBase
     {
 
+        AutenticacionService service = new AutenticacionService();
+
+        // Endpoint para crear un estudiante
         [HttpPost("IniciarSesion")]
-        public IActionResult IniciarSesion([FromBody] AutenticacionDTO autenticacionDTO)
+        public async Task<IActionResult> IniciarSesion([FromBody] AutenticacionDTO data)
         {
-            try
-            {
-                // Simplemente devuelve un mensaje de inicio de sesión exitoso.
-                return Ok(new { Message = "Inicio de sesión exitoso" });
-            }
-            catch (Exception ex)
-            {
-                // En caso de error, devuelve un mensaje de error interno del servidor.
-                return StatusCode(500, new { Message = "Ocurrió un error al iniciar sesión", Error = ex.Message });
-            }
+            var response = await service.IniciarSesion(data);// Llamar al método de servicio para crear un estudiante
+            return new JsonResult(response) { StatusCode = response.Code };// Retornar la respuesta en formato JSON con el código de estado correspondiente
+        }
+        [HttpGet("Lista-Estudiante")]
+        public async Task<IActionResult> ListaUsuarios()
+        {
+            var response = await service.ListaUsuarios();// Llamar al método de servicio para obtener la lista de estudiantes
+            return new JsonResult(response) { StatusCode = response.Code };// Retornar la respuesta en formato JSON con el código de estado correspondiente
         }
     }
 }
